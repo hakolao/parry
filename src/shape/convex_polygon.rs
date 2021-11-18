@@ -26,6 +26,9 @@ impl ConvexPolygon {
     /// Convexity of the input polyline is not checked.
     /// Returns `None` if all points form an almost flat line.
     pub fn from_convex_polyline(mut points: Vec<Point<Real>>) -> Option<Self> {
+        if points.len() == 0 {
+            return None;
+        }
         let eps = ComplexField::sqrt(crate::math::DEFAULT_EPSILON);
         let mut normals = Vec::with_capacity(points.len());
 
