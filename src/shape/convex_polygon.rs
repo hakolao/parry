@@ -144,6 +144,9 @@ impl SupportMap for ConvexPolygon {
 
 impl PolygonalFeatureMap for ConvexPolygon {
     fn local_support_feature(&self, dir: &Unit<Vector<Real>>, out_feature: &mut PolygonalFeature) {
+        if self.points.len() < 3 {
+            return ;
+        }
         let cuboid = crate::shape::Cuboid::new(self.points[2].coords);
         cuboid.local_support_feature(dir, out_feature);
         let mut best_face = 0;
